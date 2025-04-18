@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connection Monitor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-8 max-w-4xl">
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h1 class="text-2xl font-bold mb-6">Connection Monitor</h1>
+      
+      <div class="space-y-4 mb-6">
+        <div>
+          <input 
+            type="text" 
+            id="pingUrl" 
+            placeholder="URL to ping"
+            value="https://www.google.com/favicon.ico"
+            class="w-full px-3 py-2 border rounded"
+          >
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm mb-1">Check Interval (seconds)</label>
+            <input 
+              type="number" 
+              id="interval" 
+              value="5" 
+              min="1"
+              class="w-full px-3 py-2 border rounded"
+            >
+          </div>
+
+          <div>
+            <label class="block text-sm mb-1">Auto-save Interval</label>
+            <select id="autoSaveInterval" class="w-full px-3 py-2 border rounded">
+              <option value="1">Every 1 minute</option>
+              <option value="5">Every 5 minutes</option>
+              <option value="10">Every 10 minutes</option>
+              <option value="15" selected>Every 15 minutes</option>
+              <option value="30">Every 30 minutes</option>
+              <option value="45">Every 45 minutes</option>
+              <option value="60">Every 60 minutes</option>
+              <option value="90">Every 90 minutes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="autoSave" checked>
+          <label for="autoSave">Enable auto-save</label>
+        </div>
+
+        <div class="flex gap-4">
+          <button 
+            id="toggleBtn"
+            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            Start Monitoring
+          </button>
+          <button 
+            id="saveBtn"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Save Logs
+          </button>
+          <button 
+            id="clearBtn"
+            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+          >
+            Clear Logs
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="bg-gray-50 p-4 rounded">
+          <h2 class="text-lg font-semibold mb-2">Total Downtime</h2>
+          <p id="downtime" class="text-xl font-mono">0s</p>
+        </div>
+        <div class="bg-gray-50 p-4 rounded">
+          <h2 class="text-lg font-semibold mb-2">Current Status</h2>
+          <p id="status" class="text-xl">Not monitoring</p>
+        </div>
+      </div>
+
+      <div class="overflow-auto max-h-96">
+        <table class="w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left">Timestamp</th>
+              <th class="px-4 py-2 text-left">Status</th>
+              <th class="px-4 py-2 text-left">Response Time</th>
+            </tr>
+          </thead>
+          <tbody id="logsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
